@@ -10,36 +10,39 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root{--paper:#fff8ed;--ink:#27313a;--muted:#6e675f;--line:#eadcc8;--green:#6f8557;--gold:#c49a55;--coral:#d96f55;--card:#fffdf8;}
-    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:linear-gradient(180deg,#fff8ed 0%,#fff4e4 100%);color:var(--ink);font-family:Montserrat,system-ui,sans-serif;}
-    .page{width:min(100%,760px);margin:0 auto;background:rgba(255,248,237,.78);box-shadow:0 0 50px rgba(74,52,24,.08);overflow:hidden;}
-    .hero{min-height:100svh;display:grid;align-items:center;padding:18px 14px 32px;position:relative;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:#000;color:var(--ink);font-family:Montserrat,system-ui,sans-serif;}
+    .page{width:min(100%,760px);margin:0 auto;background:linear-gradient(180deg,#fff8ed 0%,#fff4e4 100%);box-shadow:0 0 50px rgba(74,52,24,.08);overflow:hidden;}
+    .video-hero{position:relative;background:#000;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .video-hero video{width:100%;height:100svh;object-fit:cover;background:#000}
+    .video-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.18),rgba(0,0,0,.42));pointer-events:none}
+    .scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);text-align:center;color:#fff;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;z-index:2}.scroll span{display:block;font-size:1.4rem;line-height:1;animation:bounce 1.5s infinite}@keyframes bounce{50%{transform:translateY(6px)}}
+    section{padding:34px 22px;border-top:1px solid var(--line)}
+    .hero{min-height:100svh;display:grid;align-items:center;padding:18px 14px 32px;position:relative;background:linear-gradient(180deg,#fff8ed 0%,#fff4e4 100%)}
     .hero img{width:100%;display:block;border-radius:28px;box-shadow:0 18px 50px rgba(68,48,28,.15);background:#fff4df;}
-    .scroll{margin:20px auto 0;text-align:center;color:var(--muted);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase}.scroll span{display:block;font-size:1.4rem;line-height:1;animation:bounce 1.5s infinite}@keyframes bounce{50%{transform:translateY(6px)}}
-    section{padding:34px 22px;border-top:1px solid var(--line)} .video-section{padding-top:10px;border-top:0}.video-wrap{border-radius:28px;overflow:hidden;background:#111;box-shadow:0 18px 50px rgba(68,48,28,.16)} video{display:block;width:100%;height:auto;background:#111}
     h2{font-family:'Playfair Display',serif;font-size:clamp(1.65rem,7vw,2.6rem);line-height:1.05;text-align:center;margin:0 0 8px;color:#2d3940} .heart{color:var(--coral);text-align:center;font-size:1.1rem;margin-bottom:14px}.copy{max-width:560px;margin:0 auto;text-align:center;color:#373737;font-size:.98rem;line-height:1.85}.script{font-family:'Playfair Display',serif;color:#2d3940;font-size:1.55rem}
     .cards{display:grid;gap:14px;margin-top:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 10px 28px rgba(68,48,28,.07)}.detail{display:flex;gap:14px;align-items:flex-start;margin:14px 0}.icon{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#f3ead8;color:#7b5a2b;flex:0 0 36px}.detail b{display:block;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}.detail span{color:var(--muted);font-size:.94rem;line-height:1.55}
-    .map-button,.rsvp-button,.secondary-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;border-radius:999px;padding:15px 18px;background:var(--green);color:white;text-decoration:none;font-weight:800;letter-spacing:.02em;margin-top:12px;box-shadow:0 12px 24px rgba(84,112,66,.22)}.secondary-button{background:#2d3940}.rsvp-button{background:#7b8b4f}.pending{font-size:.82rem;color:var(--muted);text-align:center;margin-top:10px}.dress-grid{display:grid;gap:14px;margin-top:18px}.palette{display:flex;gap:8px;justify-content:center;margin:14px 0 4px}.swatch{width:22px;height:22px;border-radius:50%;border:1px solid rgba(0,0,0,.08)}.note{font-size:.86rem;color:var(--muted);line-height:1.7;text-align:center}.gift{font-size:3rem;text-align:center;margin:6px 0}.footer{padding:34px 22px 46px;text-align:center;background:#fff2dd}.footer .names{font-family:'Playfair Display',serif;font-size:2rem;margin-top:10px}.flowers{height:34px;margin:14px auto 0;opacity:.9}
-    @media (min-width:700px){.hero{padding:28px 28px 46px} section{padding:46px 42px}.dress-grid{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr 1fr}.cards .wide{grid-column:1/-1}}
+    .map-button,.rsvp-button,.secondary-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;border-radius:999px;padding:15px 18px;background:var(--green);color:white;text-decoration:none;font-weight:800;letter-spacing:.02em;margin-top:12px;box-shadow:0 12px 24px rgba(84,112,66,.22)}.secondary-button{background:#2d3940}.rsvp-button{background:#7b8b4f}.pending{font-size:.82rem;color:var(--muted);text-align:center;margin-top:10px}.dress-grid{display:grid;gap:14px;margin-top:18px}.palette{display:flex;gap:8px;justify-content:center;margin:14px 0 4px}.swatch{width:22px;height:22px;border-radius:50%;border:1px solid rgba(0,0,0,.08)}.note{font-size:.86rem;color:var(--muted);line-height:1.7;text-align:center}.gift{font-size:3rem;text-align:center;margin:6px 0}.footer{padding:34px 22px 46px;text-align:center;background:#fff2dd}.footer .names{font-family:'Playfair Display',serif;font-size:2rem;margin-top:10px}
+    @media (min-width:700px){.hero{padding:28px 28px 46px} section{padding:46px 42px}.dress-grid{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr 1fr}}
   </style>
 </head>
 <body>
   <main class="page">
+
+    <section class="video-hero" aria-label="Video save the date">
+      <div class="video-overlay"></div>
+      <video autoplay muted playsinline preload="auto" controls>
+        <source src="assets/save-the-date-teaser-final.mov" type="video/quicktime" />
+        <source src="assets/save-the-date-teaser-final.mp4" type="video/mp4" />
+        Tu navegador no puede reproducir este video.
+      </video>
+      <div class="scroll"><span>⌄</span>Desliza para continuar</div>
+    </section>
+
     <header class="hero">
       <div>
         <img src="assets/titulo-invitacion.png" alt="Andrea y Juan Pablo - Nos casamos - 18 de julio de 2026" />
-        <div class="scroll"><span>⌄</span>Desliza para ver la invitación</div>
       </div>
     </header>
-
-    <section class="video-section" aria-label="Video save the date">
-      <div class="video-wrap">
-        <video controls playsinline preload="metadata" poster="assets/titulo-invitacion.png">
-          <source src="assets/save-the-date-teaser-final.mov" type="video/quicktime" />
-          <source src="assets/save-the-date-teaser-final.mp4" type="video/mp4" />
-          Tu navegador no puede reproducir este video.
-        </video>
-      </div>
-    </section>
 
     <section>
       <h2>Nos emociona celebrarlo con ustedes</h2><div class="heart">♥</div>
