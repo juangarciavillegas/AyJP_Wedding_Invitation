@@ -29,8 +29,8 @@
 
     <section class="video-hero" aria-label="Video save the date">
       <video id="intro-video" autoplay muted playsinline webkit-playsinline preload="auto" controls>
-        <source src="assets/save-the-date-teaser-final.mov" type="video/quicktime" />
         <source src="assets/save-the-date-teaser-final.mp4" type="video/mp4" />
+        <source src="assets/save-the-date-teaser-final.mov" type="video/quicktime" />
         Tu navegador no puede reproducir este video.
       </video>
       <div class="scroll"><span>⌄</span>Desliza para continuar</div>
@@ -100,15 +100,29 @@
     const introVideo = document.getElementById('intro-video');
     const mainImage = document.getElementById('main-image');
 
+    async function forceAutoplay() {
+      if (!introVideo) return;
+      try {
+        introVideo.muted = true;
+        introVideo.defaultMuted = true;
+        introVideo.setAttribute('muted', '');
+        introVideo.setAttribute('playsinline', '');
+        introVideo.setAttribute('webkit-playsinline', '');
+        introVideo.load();
+        await introVideo.play();
+      } catch (e) {
+        console.log('Autoplay blocked by browser until first interaction.');
+      }
+    }
+
     if (introVideo && mainImage) {
-      window.addEventListener('load', async () => {
-        try {
-          introVideo.muted = true;
-          await introVideo.play();
-        } catch (e) {
-          console.log('Autoplay blocked');
-        }
+      document.addEventListener('DOMContentLoaded', forceAutoplay);
+      window.addEventListener('load', forceAutoplay);
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && introVideo.paused) forceAutoplay();
       });
+      document.addEventListener('touchstart', forceAutoplay, { once: true });
+      document.addEventListener('click', forceAutoplay, { once: true });
 
       introVideo.addEventListener('ended', () => {
         mainImage.scrollIntoView({ behavior: 'smooth', block: 'start' });
