@@ -14,8 +14,7 @@
     .page{width:min(100%,760px);margin:0 auto;background:linear-gradient(180deg,#fff8ed 0%,#fff4e4 100%);box-shadow:0 0 50px rgba(74,52,24,.08);overflow:hidden;}
     .video-hero{position:relative;background:#000;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden}
     .video-hero video{width:100%;height:100svh;object-fit:cover;background:#000}
-    .video-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.18),rgba(0,0,0,.42));pointer-events:none}
-    .scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);text-align:center;color:#fff;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;z-index:2}.scroll span{display:block;font-size:1.4rem;line-height:1;animation:bounce 1.5s infinite}@keyframes bounce{50%{transform:translateY(6px)}}
+    .scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);text-align:center;color:#fff;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;z-index:2;text-shadow:0 2px 10px rgba(0,0,0,.45)}.scroll span{display:block;font-size:1.4rem;line-height:1;animation:bounce 1.5s infinite}@keyframes bounce{50%{transform:translateY(6px)}}
     section{padding:34px 22px;border-top:1px solid var(--line)}
     .hero{min-height:100svh;display:grid;align-items:center;padding:18px 14px 32px;position:relative;background:linear-gradient(180deg,#fff8ed 0%,#fff4e4 100%)}
     .hero img{width:100%;display:block;border-radius:28px;box-shadow:0 18px 50px rgba(68,48,28,.15);background:#fff4df;}
@@ -29,8 +28,7 @@
   <main class="page">
 
     <section class="video-hero" aria-label="Video save the date">
-      <div class="video-overlay"></div>
-      <video autoplay muted playsinline preload="auto" controls>
+      <video id="intro-video" autoplay muted playsinline preload="auto" controls>
         <source src="assets/save-the-date-teaser-final.mov" type="video/quicktime" />
         <source src="assets/save-the-date-teaser-final.mp4" type="video/mp4" />
         Tu navegador no puede reproducir este video.
@@ -38,7 +36,7 @@
       <div class="scroll"><span>⌄</span>Desliza para continuar</div>
     </section>
 
-    <header class="hero">
+    <header class="hero" id="main-image">
       <div>
         <img src="assets/titulo-invitacion.png" alt="Andrea y Juan Pablo - Nos casamos - 18 de julio de 2026" />
       </div>
@@ -97,5 +95,16 @@
       <div class="names">Andrea &amp; Juan Pablo</div>
     </footer>
   </main>
+
+  <script>
+    const introVideo = document.getElementById('intro-video');
+    const mainImage = document.getElementById('main-image');
+
+    if (introVideo && mainImage) {
+      introVideo.addEventListener('ended', () => {
+        mainImage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  </script>
 </body>
 </html>
