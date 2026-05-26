@@ -37,7 +37,6 @@
     .secondary-button{background:#2d3940}
     .calendar-button{background:#b87947;margin-top:18px}
     .rsvp-button{background:#7b8b4f}
-    .pending{font-size:.82rem;color:var(--muted);text-align:center;margin-top:10px}
     .dress-grid{display:grid;gap:14px;margin-top:18px}
     .note{font-size:.86rem;color:var(--muted);line-height:1.7;text-align:center}
     .gift{font-size:4.5rem;text-align:center;margin:10px 0 14px}
@@ -80,7 +79,7 @@
         <div class="card"><div class="detail"><div class="icon">🏛️</div><div><b>Lugar</b><span>Hacienda San Jorge</span></div></div></div>
         <div class="card"><div class="detail"><div class="icon">📍</div><div><b>Ubicación</b><span>Vía Cerritos,<br>Pereira, Risaralda</span></div></div></div>
       </div>
-      <a id="calendar-button" class="calendar-button" href="#" download="boda-andrea-juan-pablo.ics">Agregar a mi calendario</a>
+      <a class="calendar-button" href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20260718T203000Z%2F20260719T070000Z&details=&location=Hacienda%20San%20Jorge%2C%20Pereira%20Risaralda&text=Andrea%20y%20Juan%20Pablo" target="_blank" rel="noopener">Agregar a mi calendario</a>
     </section>
 
     <section>
@@ -116,19 +115,10 @@
   <script>
     const introVideo = document.getElementById('intro-video');
     const mainImage = document.getElementById('main-image');
-    const calendarButton = document.getElementById('calendar-button');
 
     async function tryPlayVideo(){try{await introVideo.play();}catch(err){console.log('Autoplay blocked:',err);}}
 
-    function createCalendarFile(){
-      const icsContent = [
-        'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Andrea y Juan Pablo//Invitacion Boda//ES','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT','UID:boda-andrea-juan-pablo-20260718@ayjp-wedding','DTSTAMP:20260525T000000Z','DTSTART:20260718T210000Z','DTEND:20260719T070000Z','SUMMARY:Boda de Andrea y Juan Pablo','LOCATION:Hacienda San Jorge, Via Cerritos, Pereira, Risaralda','DESCRIPTION:Nos emociona celebrar este dia con ustedes. Ceremonia: 4:00 p.m. Lugar: Hacienda San Jorge, Via Cerritos, Pereira, Risaralda.','END:VEVENT','END:VCALENDAR'
-      ].join('\r\n');
-      const calendarBlob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-      calendarButton.href = URL.createObjectURL(calendarBlob);
-    }
-
-    document.addEventListener('DOMContentLoaded',()=>{introVideo.muted=true;tryPlayVideo();createCalendarFile();});
+    document.addEventListener('DOMContentLoaded',()=>{introVideo.muted=true;tryPlayVideo();});
     document.addEventListener('click',tryPlayVideo,{once:true});
     document.addEventListener('touchstart',tryPlayVideo,{once:true});
     introVideo.addEventListener('ended',()=>{mainImage.scrollIntoView({behavior:'smooth',block:'start'});});
